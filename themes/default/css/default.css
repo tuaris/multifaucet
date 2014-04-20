@@ -1,0 +1,284 @@
+*{
+	border: none;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+html,body{
+	height: 100%;
+}
+
+body{
+	background-color: #ddd;
+	font-size: 62.5%;
+	font-family: 'Verdana','Arial',sans-serif;
+	overflow: hidden;
+}
+
+div#wrapper{
+	max-width: 900px;
+	margin: 0 auto;
+	font-size: 1.4em;
+	position: relative;
+	height: 100%;
+}
+
+div#stats{
+	font-size: .8em;
+	color: #999;
+	padding: 0 1.5em;
+}
+
+div.container{
+	background-color: #fff;
+	border-radius: 5px;
+	width: 50%;
+	padding: 1em;
+	margin: 1em;
+	word-wrap: break-word;
+}
+
+div.container input{
+	width: 100%;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+	display: block;
+	font-size: 1.5em;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: inset 0px 1px 2px #ddd;
+	padding: .5em .7em;
+	margin-bottom: .5em;
+}
+
+div#site-setup.installer,
+div#database-settings.installer,
+#license-agreement {
+	max-height: 360px;
+	overflow-y:auto;
+}
+
+pre#copyright-notice{
+ white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+div.installer input[type="radio"], 
+div.installer input[type="checkbox"]{
+	width:auto;
+	margin-right: 2px;
+}
+form#install-form fieldset.install-button{
+	padding-top: 10px;
+}
+
+div.container input:last-child{
+	margin-bottom: 0;
+}
+
+div.container input[type="submit"]{
+	background-color: #ffff00;
+	box-shadow: inset 0px -1px 4px #dddd00;
+	border: 1px solid #cccc00;
+	font-weight: bold;
+	/*color: #fff;
+	text-shadow: 0px 0px 2px #000;*/
+}
+
+div.container input[type="submit"]:hover{
+	background-color: #ffff66;
+	box-shadow: inset 0px -1px 4px #dddd00;
+	border: 1px solid #cccc00;
+	font-weight: bold;
+}
+
+div.container input[type="submit"]:active{
+	background-color: #f4f400;
+	box-shadow: inset 0px 1px 4px #cccc00;
+	border: 1px solid #cccc00;
+	font-weight: bold;
+}
+
+form #captcha.simple-captcha img{
+	display: block;
+	margin: 0 auto .6em auto;
+	border: 1px solid #ccc;
+	height: 75px; /* prevents the content jump */
+	width: 160px;
+}
+form #captcha.solvemedia #adcopy-outer, 
+form #captcha.recaptcha #recaptcha_area{
+	margin: 0 auto .6em auto;
+}
+
+h1{
+	color: #fff;
+	font-weight: bold;
+	font-size: 2em;
+	padding: 2em 0 .2em .5em;
+}
+
+p{
+	line-height: 1.5em;
+}
+.error-message{
+	color: #f00;
+}
+p.error{
+	color: #f00;
+	padding-top: 1em;
+}
+
+p.big{
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #bbbb00;
+}
+
+.installer p{
+	margin-top: 0px;
+	margin-bottom: 20px;
+}
+.installer select{
+	border: inset 1px;
+}
+.install-button button{
+	border: outset 1px;
+	border-radius: 5px;
+	padding: 3px;
+}
+.installer .instructions{
+	font-size: 0.8em;
+}
+
+img.droplet{
+	position: absolute;
+	right: 1em;
+	top: 0%;
+	max-width: 300px;
+	width: 30%;
+	margin-top: -40%;
+	-webkit-animation: much_coins linear 6s infinite;
+	animation: much_coins linear 6s infinite;
+}
+
+img.droplet:nth-of-type(2){
+	-webkit-animation-delay: 2s;
+	-webkit-animation-name: much_coins2;
+	animation-delay: 2s;
+	animation-name: much_coins2;
+}
+
+img.droplet:nth-of-type(3){
+	-webkit-animation-delay: 4s;
+	-webkit-animation-name: much_coins3;
+	animation-delay: 4s;
+	animation-name: much_coins3;
+}
+
+@keyframes much_coins{
+	from{
+		top: 0%;
+		margin-top: -40%;
+	}
+	to{
+		top: 100%;
+		margin-top: 0%;
+		transform: rotate(-45deg);
+	}
+}
+
+@keyframes much_coins2{
+	from{
+		top: 0%;
+		margin-top: -40%;
+	}
+	to{
+		top: 100%;
+		margin-top: 0%;
+		transform: rotate(30deg);
+	}
+}
+
+@keyframes much_coins3{
+	from{
+		top: 0%;
+		margin-top: -40%;
+	}
+	to{
+		top: 100%;
+		margin-top: 0%;
+		transform: rotate(90deg);
+	}
+}
+
+@-webkit-keyframes much_coins{
+	from{
+		top: 0%;
+		margin-top: -40%;
+	}
+	to{
+		top: 100%;
+		margin-top: 0%;
+		-webkit-transform: rotate(-45deg);
+	}
+}
+
+@-webkit-keyframes much_coins2{
+	from{
+		top: 0%;
+		margin-top: -40%;
+	}
+	to{
+		top: 100%;
+		margin-top: 0%;
+		-webkit-transform: rotate(30deg);
+	}
+}
+
+@-webkit-keyframes much_coins3{
+	from{
+		top: 0%;
+		margin-top: -40%;
+	}
+	to{
+		top: 100%;
+		margin-top: 0%;
+		-webkit-transform: rotate(90deg);
+	}
+}
+
+@media all and (max-width: 450px)
+	{
+	body{
+		overflow: auto;
+	}
+
+	div.container{
+		width: auto;
+		margin-right: 1em;
+		}
+
+	h1{
+		padding-top: .2em;
+	}
+
+	img.droplet{
+		width: 100%;
+		display: block;
+		-webkit-animation: none;
+		animation: none;
+		position: static;
+		margin: 2em auto 0 auto;
+		}
+
+	img.droplet:nth-of-type(2),img.droplet:nth-of-type(3){
+		display: none;
+		}
+	}
