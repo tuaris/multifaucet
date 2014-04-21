@@ -4,7 +4,7 @@ $LANGUAGE['current_lang'] = 'es';
 $LANGUAGE['site_heading'] = "Canilla de {$SETTINGS->config['coin_code']}";
 
 
-$LANGUAGE['faucet_incomplete'] = 'La canilla incompleta, es posible que falte la configuración o el cliente RPC no está disponible..';
+$LANGUAGE['faucet_incomplete'] = 'La canilla esta incompleta, es posible que falte la configuración o el cliente RPC no está disponible..';
 $LANGUAGE['faucet_dry'] = "La canilla está seca! Por favor, done.";
 $LANGUAGE['faucet_donate'] = "Por favor dona para mantener esta canilla abierta";
 $LANGUAGE['faucet_connect_error'] = "Parece que no se puede conectar en este momento, por favor regrese más tarde!";
