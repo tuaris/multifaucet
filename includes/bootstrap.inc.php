@@ -12,7 +12,6 @@ require_once("classes/wallet.interface.php");
 require_once("classes/CoinAddressValidator.class.php");
 require_once("classes/coldwallet.class.php");
 require_once("classes/jsonRPCClient.class.php");
-require_once("classes/jsonRPCServer.class.php");
 require_once("classes/hotwallet.class.php");
 require_once("classes/faucet.class.php");
 

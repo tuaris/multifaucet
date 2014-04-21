@@ -167,7 +167,7 @@ function check_wallet($type){
 	
 	if($type == 'hot'){
 		//Load Hot Wallet Libraries
-		require_once("classes/jsonrpc.class.php");
+		require_once("classes/jsonRPCClient.class.php");
 		require_once("classes/hotwallet.class.php");
 	}
 	else{

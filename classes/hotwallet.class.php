@@ -20,7 +20,7 @@ class HotWallet implements Wallet {
 		return $this->rpc_call("sendtoaddress",array($address, $amount));
 	}
 	public function test(){
-		return $this->rpc_call("getinfo",array());
+		return $this->rpc_call("getinfo");
 	}
 	public function validateaddress($address){
 		$result = false;
@@ -47,7 +47,7 @@ class HotWallet implements Wallet {
 
 	protected function rpc_call($method, $params = array()) {
 		if(!empty($this->RPC)){
-			return @$this->rpc_client->__call($method, $params);
+			return @$this->RPC->__call($method, $params);
 		}
 		else {
 			return null;

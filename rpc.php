@@ -1,6 +1,7 @@
-<?php include('includes/bootstrap.inc.php'); ?>
-<?php include("classes/advancedcoldwallet.class.php"); ?>
-<?php include("classes/FaucetRPC.class.php"); ?>
+<?php require_once('includes/bootstrap.inc.php'); ?>
+<?php require_once("classes/advancedcoldwallet.class.php"); ?>
+<?php require_once("classes/FaucetRPC.class.php"); ?>
+<?php require_once("classes/jsonRPCServer.class.php"); ?>
 <?php
 
 //Requires Authentication
