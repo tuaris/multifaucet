@@ -77,14 +77,23 @@ function simple_php_captcha($config = array()) {
 	}
 	
 	// Generate HTML for image src
-	$image_src = substr(__FILE__, strlen($_SERVER['DOCUMENT_ROOT'])) . '?_CAPTCHA&amp;s='.urlencode($captcha_config["session_name"]).'&amp;t=' . urlencode(microtime()); // Dogenes
+	//$image_path = dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR . basename(__FILE__);
+	//$image_path = dirname(__FILE__);
+	//$image_path = dirname($_SERVER['DOCUMENT_ROOT']);
+	$image_path = str_replace(dirname($_SERVER['DOCUMENT_ROOT']), "", dirname(__FILE__));
+	$image_request = '?_CAPTCHA&amp;s='.urlencode($captcha_config["session_name"]).'&amp;t=' . urlencode(microtime());
+	$image_file = basename(__FILE__) . $image_request;
+	$image_src = substr(__FILE__, strlen($_SERVER['DOCUMENT_ROOT'])) . $image_file;
 	$image_src = '/' . ltrim(preg_replace('/\\\\/', '/', $image_src), '/');
 
 	$_SESSION['_CAPTCHA']['config'] = serialize($captcha_config);
 	
 	return array(
 		'code' => $captcha_config['code'],
-		'image_src' => $image_src
+		'image_src' => $image_src,
+		'image_path' => $image_path,
+		'image_file' => $image_file,
+		'image_request' => $image_request
 	);
 	
 }
@@ -117,6 +126,7 @@ if( isset($_GET['_CAPTCHA']) ) {
 	@session_start();
 	
 	$captcha_config = @unserialize($_SESSION['_CAPTCHA']['config']); // Dogenes
+
 	if( !$captcha_config ) exit();
 	
 	unset($_SESSION['_CAPTCHA']);

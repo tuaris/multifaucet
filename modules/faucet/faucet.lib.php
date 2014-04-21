@@ -25,12 +25,13 @@ function faucet_get_captcha($SETTINGS){
 		//Load Captcha HTML
 		if($SETTINGS->get("captcha") == "simple-captcha") {
 			//Load simple captcha library
-			require_once './libraries/simple-captcha/simple-php-captcha.php';
+			$simplecaptcha = './libraries/simple-captcha/simple-php-captcha.php';
+			require_once $simplecaptcha;
 			$captcha_config['session_name'] = $SETTINGS->config["captcha_config"]["simple_captcha_session_name"];
 			@session_name($captcha_config['session_name']);
 			@session_start();
 			$_SESSION['captcha'] = simple_php_captcha($captcha_config); // set a new CAPTCHA
-			return isset($_SESSION['captcha']) ? '<img src="'.$_SESSION['captcha']["image_src"].'" alt="[captcha]"/>' : '';
+			return isset($_SESSION['captcha']) ? '<img src="'. $simplecaptcha . $_SESSION['captcha']["image_request"] . '" alt="[captcha]"/>' : '';
 		}
 		elseif($SETTINGS->get("captcha") == "solvemedia") {
 			//Load solvemedia library
