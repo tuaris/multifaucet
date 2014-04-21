@@ -1,0 +1,7 @@
+<Files awstats.pl>
+AuthName "faucet.securepayment.cc statistics"
+AuthType Basic
+AuthUserFile /home/clients/securepayment.cc/domains/faucet.securepayment.cc/.faucet-htpasswd
+require valid-user
+order deny,allow
+</Files>

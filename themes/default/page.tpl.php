@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 	<meta name="author" content="tuaris" />
-	<link rel="stylesheet" href="<?php echo theme_dir(); ?>/css/default.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo theme_dir(); ?>css/default.css" type="text/css" />
 	<title><?php print($title); ?></title>
 </head>
 <body>
@@ -26,9 +26,9 @@
 			<p><?php print($stats['number_of_payouts']); ?> <?php print translate('payouts'); ?></p>
 		</div>
 		<?php } ?>
-		<img src="<?php echo theme_dir(); ?>/images/droplet.png" class="droplet" alt=""/>
-		<img src="<?php echo theme_dir(); ?>/images/droplet.png" class="droplet" alt=""/>
-		<img src="<?php echo theme_dir(); ?>/images/droplet.png" class="droplet" alt=""/>
+		<img src="<?php echo theme_dir(); ?>images/droplet.png" class="droplet" alt=""/>
+		<img src="<?php echo theme_dir(); ?>images/droplet.png" class="droplet" alt=""/>
+		<img src="<?php echo theme_dir(); ?>images/droplet.png" class="droplet" alt=""/>
 	</div>
 </body>
 </html>
