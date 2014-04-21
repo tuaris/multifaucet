@@ -2,7 +2,7 @@
 //Connects to the database
 
 //Load database config
-include(APPLICATION_CONFDIR . 'db.conf.php');		
+include(APPLICATION_CONFDIR . 'db.conf.php');
 
 //Verify database connectivity
 $DB = AppDB::GetInstance();

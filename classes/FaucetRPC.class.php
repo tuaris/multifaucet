@@ -88,7 +88,7 @@ class FaucetRPC{
 	* Gets the current available funds
 	*
 	*/
-	public function getFunds($amount = 0){
+	public function getFunds(){
 		return $this->COLD_WALLET->getbalance();
 	}
 }

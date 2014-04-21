@@ -2,7 +2,7 @@
  error_reporting(E_ALL);
  ini_set("display_errors", 0);
 ?>
-<?php @include_once("includes/multisite.inc.php"); //Enables Multisite Capabilites ?>
+<?php @include_once("system/multisite.inc.php"); //Enables Multisite Capabilites ?>
 <?php include("system/app.conf.php"); ?>
 <?php include('modules/install/install.lib.php'); ?>
 <?php
@@ -16,7 +16,7 @@ $vars = array();
 //Check if already installed
 if(is_file(APPLICATION_CONFDIR . '.install_complete')) {
 	//Prevents distructive behavors if already installed
-	$vars['clean_install'] = true;
+	$vars['clean_install'] = false;
 }
 
 //Process any GET requests

@@ -2,8 +2,8 @@
  error_reporting(E_ALL);
  ini_set("display_errors", 0);
 
-@include_once("includes/multisite.inc.php"); //Enables Multisite Capabilites
-require_once("system/app.conf.php");
+@include_once("system/multisite.inc.php"); //Enables Multisite Capabilites
+require_once("system/app.conf.php"); //Application Constants
 @include_once("config/local.conf.php"); //User Made Application Options
 require_once("libraries/template.lib.php"); //Load Template Engine
 require_once("classes/db.class.php");

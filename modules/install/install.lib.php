@@ -296,8 +296,9 @@ function install_process_post_request($step, &$vars = array()){
 	try{
 		switch($step){
 			case 2:
-				//Create Config directory
-				if(!mkdir(APPLICATION_CONFDIR, 0755, true)){throw new Exception("Can't create configuration directory", 2);}
+				//Check if Config directory is writable
+				if(!@touch(APPLICATION_CONFDIR)){throw new Exception("Configuration directory is not writable", 2);}
+				break;
 			case 3:
 				//Database Setup
 				write_db_config($_POST['baseserver'], 

@@ -1,5 +1,5 @@
 <form action='?step=2' method='post'>
-						<?php if($error == "2") { ?>
+						<?php if(@$error == "2") { ?>
 						<p class='error-message config-error'>Configuration directory not writable, check file permissions</p>
 						<?php }	?>
 						<p>Welcome to the <strong><?php echo APPLICATION_NAME; ?></strong>, loosely derived from <em id="original">Simple Faucet script by Dogenes</em>.  To continue please read and accept the following license agreement.</p><br />
