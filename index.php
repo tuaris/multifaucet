@@ -17,7 +17,7 @@ if (isset($_POST["cryptocoin_address"]) &&
 						'adcopy_response' => @$_POST["adcopy_response"])) 
 ) {
 	//Good CAPTCHA - attempt payout
-	$FAUCET->payout($_POST["cryptocoin_address"], $_SERVER["REMOTE_ADDR"], $_POST["promo_code"]);
+	$FAUCET->payout($_POST["cryptocoin_address"], $_SERVER["REMOTE_ADDR"], @$_POST["promo_code"]);
 
 	//Get status
 	$status = $FAUCET->status();
