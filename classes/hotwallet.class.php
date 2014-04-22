@@ -17,7 +17,7 @@ class HotWallet implements Wallet {
 		return $balance;
 	}
 	public function sendtoaddress($address, $amount){
-		return $this->rpc_call("sendtoaddress",array($address, $amount));
+		return $this->rpc_call("sendtoaddress",array((string)$address, (float)$amount));
 	}
 	public function test(){
 		return $this->rpc_call("getinfo");
