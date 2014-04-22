@@ -34,6 +34,9 @@ else{
 // statistics:
 $vars['stats'] = $FAUCET->get_stats();
 
+//Save Status
+$vars['status'] = $status;
+
 //TODO: I need to think of a better way to do this
 $show_form = faucet_eval_status($status, $vars, $LANGUAGE, $SETTINGS);
 if ($show_form){

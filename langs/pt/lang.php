@@ -24,5 +24,6 @@ $LANGUAGE['submit_button_text'] = "Envie moedas";
 $LANGUAGE['payouts'] = "pagamentos";
 $LANGUAGE['faucet_balance'] = "Fundos torneira";
 $LANGUAGE['average_payout'] = "Pagamento médio";
+$LANGUAGE['support_sponsor'] = "Por favor, apoiar este site e clique na seguinte anúncio";
 
 ?>

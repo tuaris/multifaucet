@@ -24,6 +24,7 @@ $LANGUAGE['submit_button_text'] = "Get coins";
 $LANGUAGE['payouts'] = "payouts";
 $LANGUAGE['faucet_balance'] = "Faucet balance";
 $LANGUAGE['average_payout'] = "Average payout";
+$LANGUAGE['support_sponsor'] = "Please support this faucet and visit our sponsor";
 
 
 

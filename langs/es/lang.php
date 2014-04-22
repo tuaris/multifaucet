@@ -24,5 +24,6 @@ $LANGUAGE['submit_button_text'] = "Envíe las monedas";
 $LANGUAGE['payouts'] = "pagos";
 $LANGUAGE['faucet_balance'] = "Fondos de la canilla";
 $LANGUAGE['average_payout'] = "Pago promedio";
+$LANGUAGE['support_sponsor'] = "Por favor, apoye este sitio y haga clic en el siguiente anuncio";
 
 ?>
