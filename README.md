@@ -56,7 +56,7 @@ The promo codes feature (if enabled) awards an extra amount of coins to the visi
 codes and rewards will need to be manually entered into the database table "PRFX_promo_codes".
 
 If you are using the hot wallet, payments will be sent immediately.  If using the cold wallet the funds need
-to be sent manually or by a script.  The faucet’s RPC interface can aid with this process.  A sample PHP 
+to be sent manually or by a script.  The faucet's RPC interface can aid with this process.  A sample PHP 
 script that interacts with the faucet's RPC interface to send payments and re-fill the faucet along with
 detailed usage can be found at:
 
