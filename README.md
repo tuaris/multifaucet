@@ -62,6 +62,15 @@ detailed usage can be found at:
 
 http://www.unibia.net/crypto-faucet
 
-If you found this program useful please show your appreciation by sending me some 
+Restrictions
+------------
+
+All installations must preserve the HTML in "powered by" section in the default theme.  Custom themes 
+must also produce the same HTML code unless written permission is granted by the MultiFaucet author.
+
+If you found this program useful please show your appreciation by sending me some:
+
 BTC: 1B6eyXVRPxdEitW5vWrUnzzXUy6o38P9wN
 ZET: ZK6kdE5H5q7H6QRNRAuqLF6RrVD4cFbiNX
+
+Donators will be allowed to remove the "powered by" link.

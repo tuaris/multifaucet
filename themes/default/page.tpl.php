@@ -19,6 +19,12 @@
 			<p class="big"><?php print(get_setting('donation_address')); ?></p>
 		</div>
 		<?php } ?>
+		<div id="poweredby">
+			<!-- Before removing this link please see README -->
+			<a href="http://cur.lv/99zcp" title="<?php echo APPLICATION_WEBSITE; ?>">
+				<?php echo APPLICATION_NAME . ' ' . APPLICATION_VERSION; ?>
+			</a>
+		</div>
 		<?php if(isset($stats)) { ?>
 		<div id="stats">
 			<p><?php print translate('faucet_balance'); ?>: <?php print($stats['balance']); ?></p>

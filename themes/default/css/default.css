@@ -157,6 +157,15 @@ p.big{
 	font-size: 0.8em;
 }
 
+#poweredby{
+	font-size: 1.0em;
+	color: #999;
+	padding: 0 1.2em;
+}
+#poweredby a{
+	color: #999000;
+}
+
 img.droplet{
 	position: absolute;
 	right: 1em;
