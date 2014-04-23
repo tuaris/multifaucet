@@ -21,7 +21,7 @@
 		<?php } ?>
 		<div id="poweredby">
 			<!-- Before removing this link please see README -->
-			<a href="http://cur.lv/99zcp" title="<?php echo APPLICATION_WEBSITE; ?>">
+			<a href="http://cur.lv/99zcp" title="<?php echo APPLICATION_WEBSITE; ?>" target="_blank">
 				<?php echo APPLICATION_NAME . ' ' . APPLICATION_VERSION; ?>
 			</a>
 		</div>
