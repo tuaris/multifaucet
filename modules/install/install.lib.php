@@ -527,7 +527,7 @@ function install_get_faucet_config(){
 	
 	// SpammerSlapper
 	$faucet['spammerslapper_key'] = isset($config['spammerslapper_key']) ? $config['spammerslapper_key'] : '';
-	$faucet['use_spammerslapper'] = isset($config['use_spammerslapper']) ? $config['use_spammerslapper'] : true;
+	$faucet['use_spammerslapper'] = isset($config['use_spammerslapper']) ? $config['use_spammerslapper'] : false;
 
 	return $faucet;
 }
