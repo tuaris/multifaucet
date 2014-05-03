@@ -163,7 +163,7 @@ if(
 // Make sure SpammerSlapper is setup properly
 if(
 	//SpammerSlapper
-	((bool)$settings['use_spammerslapper'] && 
+	($settings['use_spammerslapper'] == 'true' && 
 	empty($settings['spammerslapper_key'])
 	)
 ){
