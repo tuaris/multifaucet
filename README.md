@@ -1,4 +1,4 @@
-MutiFaucet v0.8.0
+MutiFaucet v0.8.1
 =================
 Copyright 2014 by The Daniel Morante Company, Inc.
 http://www.unibia.net/crypto-faucet
@@ -14,6 +14,7 @@ It's current features include:
 - Support for either Hot or Cold crypto wallets.
 - Themes.
 - Simple Captcha, re-CAPTCHA, or Solve Media.
+- SpammerSlapper* Anti-Proxy Abuse
 - Remote Management via JSON-RPC.
 - Muti-site capable (premium add-on).
 
