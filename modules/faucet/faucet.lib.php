@@ -92,6 +92,43 @@ function faucet_valid_captcha($SETTINGS, $remote_address, $captcha_data = array(
 	return $isGood;
 }
 
+function faucet_check_spammerslapper($SETTINGS, &$vars){
+	$isGood = false;
+
+	if(@$SETTINGS->config["use_spammerslapper"]){
+		//Load SpammerSlapper library
+		require('./libraries/spammerslapperlib.php');
+
+		//We only need to use IP based services
+		$options = array(
+			'CHECK_SPAMASSASIN' => false,
+			'CHECK_PROXY' => true,
+			'CHECK_HTTPBL' => true,
+			'CHECK_FORUMSPAM' => true,
+			'CHECK_EMAIL' => false,
+			'CHECK_DBLORG' => false,
+			'CHECK_SPAMHAUSDBL' => false
+		);
+
+		$result = spammerslapper_check($SETTINGS->config["spammerslapper_key"], array(), $options);
+		if($result->SPAM){
+			//Using a Proxy or IP is blacklisted
+			$vars['error'] = $result->Message;
+			$isGood = false;
+		}
+		else {
+			//All is good
+			$isGood = true;
+		}
+	}
+	else{
+		//If no SpammerSlapper is in use, then return true
+		$isGood = true;
+	}
+	
+	return $isGood;
+}
+
 function faucet_eval_status($status, &$vars, $LANGUAGE, $SETTINGS){
 	switch ($status) {
 		case SF_STATUS_FAUCET_INCOMPLETE:
@@ -128,7 +165,7 @@ function faucet_eval_status($status, &$vars, $LANGUAGE, $SETTINGS){
 			break;
 
 		case SF_STATUS_PAYOUT_ERROR:
-			$vars['status_message'] = $LANGUAGE['try_later'];
+			$vars['status_message'] = $LANGUAGE['try_later'] . ' ' . $vars['error'];
 			$show_form = false;
 			break;
 

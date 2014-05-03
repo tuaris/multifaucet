@@ -72,6 +72,7 @@ function write_faucet_config($settings,  $file){
 $settings['use_promo_codes'] = $settings['use_promo_codes'] == true ? 'true' : 'false';
 $settings['captcha'] = $settings['use_captcha'] == 'false' ? '' : $settings['use_captcha'];
 $settings['use_captcha'] = $settings['use_captcha'] == 'false' ? 'false' : 'true';
+$settings['use_spammerslapper'] = $settings['use_spammerslapper'] ? 'true' : 'false';
 
 $buffer = <<<EOF
 <?php
@@ -91,6 +92,7 @@ $buffer = <<<EOF
 	"user_check" => "{$settings['user_check']}",
 
 	"use_captcha" => {$settings['use_captcha']}, // require the user to enter a captcha
+	"use_spammerslapper" => {$settings['use_spammerslapper']}, // Prevent The use of Proxies and check the IP against Blacklists
 
 	"captcha" => "{$settings['captcha']}", // which CAPTCHA to use, possible values are: "recaptcha", "solvemedia", and "simple-captcha".
 
@@ -105,6 +107,8 @@ $buffer = <<<EOF
 		"solvemedia_challenge_key" => "{$settings['captcha_config']['solvemedia_challenge_key']}",
 		"solvemedia_hash_key" => "{$settings['captcha_config']['solvemedia_hash_key']}",
 	),
+
+	"spammerslapper_key" => "{$settings['spammerslapper_key']}", // SpammerSlapper API key.
 
 	// promo codes:
 	"use_promo_codes" => {$settings['use_promo_codes']}, // accept promo codes
@@ -156,7 +160,15 @@ if(
 	throw new Exception("CAPTACH configuration incomplete.", 3);
 }
 
-
+// Make sure SpammerSlapper is setup properly
+if(
+	//SpammerSlapper
+	((bool)$settings['use_spammerslapper'] && 
+	empty($settings['spammerslapper_key'])
+	)
+){
+	throw new Exception("SpammerSlapper configuration incomplete.", 4);
+}
 }
 
 function check_wallet($type){
@@ -345,6 +357,8 @@ function install_process_post_request($step, &$vars = array()){
 						'solvemedia_hash_key' => $_POST['solvemedia_hash_key']
 					), 
 					'use_promo_codes' => isset($_POST['use_promo_codes']), 
+					'use_spammerslapper' => isset($_POST['use_spammerslapper']), 
+					'spammerslapper_key' => $_POST['spammerslapper_key'], 
 					'donation_address' => $_POST['donation_address'], 
 					'title' => $_POST['title'], 
 					'sitename' => $_POST['sitename'], 
@@ -484,6 +498,8 @@ function install_get_faucet_config(){
 			case 'captcha': 
 			case 'captcha_config': 
 			case 'use_promo_codes': 
+			case 'use_spammerslapper': 
+			case 'spammerslapper_key': 
 			case 'wallet_passphrase': 
 			case 'template': 
 			case 'user_check': 
@@ -508,6 +524,10 @@ function install_get_faucet_config(){
 
 	//Other options
 	$faucet['PROMO'] = isset($config['use_promo_codes']) ? $config['use_promo_codes'] : true;
+	
+	// SpammerSlapper
+	$faucet['spammerslapper_key'] = isset($config['spammerslapper_key']) ? $config['spammerslapper_key'] : '';
+	$faucet['use_spammerslapper'] = isset($config['use_spammerslapper']) ? $config['use_spammerslapper'] : true;
 
 	return $faucet;
 }

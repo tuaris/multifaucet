@@ -8,6 +8,9 @@
 						<?php if($error == "3") { ?>
 						<p class='error-message faucet-error'>Please, check CAPTCHA information</p>
 						<?php }	?>
+						<?php if($error == "4") { ?>
+						<p class='error-message faucet-error'>Please, check SpammerSlapper information</p>
+						<?php }	?>
 						<div id='site-setup' class='installer settings-holder'>
 							<h4>Faucet Settings:</h4>
 							<div id='site-settings' class='installer subsection settings-holder'>
@@ -78,6 +81,18 @@
 									<?php } ?>
 								</select>
 								</p>
+
+								<p class='even'>
+								Enabling the following option will prevent abuse from proxy's and blacklisted IP addresses such as Tor exit nodes.
+								<br /><br />
+								<label><input type="checkbox" value='true' name='use_spammerslapper' <?php echo $FAUCET['use_spammerslapper'] ? 'checked="checked"' : ''; ?>/> Use SpammerSlapper</label></p>
+
+								<p class='odd'>If using SpammerSlapper, setup the API key below</p>
+								<p class='even'>
+								<label for="spammerslapper_key">API Key:</label>
+								<input type='text' size='37' value='<?php echo $FAUCET['spammerslapper_key'] ?: ''; ?>' name='spammerslapper_key' />
+								</p>
+
 							</div>
 							
 							<h4>Site Settings:</h4>

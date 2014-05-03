@@ -16,11 +16,19 @@ if (isset($_POST["cryptocoin_address"]) &&
 						'adcopy_challenge' => @$_POST["adcopy_challenge"],
 						'adcopy_response' => @$_POST["adcopy_response"])) 
 ) {
-	//Good CAPTCHA - attempt payout
-	$FAUCET->payout($_POST["cryptocoin_address"], $_SERVER["REMOTE_ADDR"], @$_POST["promo_code"]);
 
-	//Get status
-	$status = $FAUCET->status();
+	//Check Spammer Slapper
+	if(faucet_check_spammerslapper($SETTINGS, $vars)){
+		//Good CAPTCHA and Spammer Slapper - attempt payout
+		$FAUCET->payout($_POST["cryptocoin_address"], $_SERVER["REMOTE_ADDR"], @$_POST["promo_code"]);
+
+		//Get status
+		$status = $FAUCET->status();
+	}
+	else {
+		//SpammerSlapper Failed
+		$status = SF_STATUS_PAYOUT_ERROR;
+	}
 }
 elseif (isset($_POST["cryptocoin_address"])) {
 	//BAD CAPTCHA

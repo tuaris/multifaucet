@@ -1,7 +1,7 @@
 <?php
 //SHORTCUT TO GET CURRENT LANGUAGE
 $LANGUAGE['current_lang'] = 'pt';
-$LANGUAGE['site_heading'] = "Torneira de {$SETTINGS->config['coin_code']}";
+$LANGUAGE['site_heading'] = "Torneira de {$SETTINGS->config['sitedesc']}";
 
 
 $LANGUAGE['faucet_incomplete'] = 'A torneira incompleto, pode estar faltando configuração ou cliente RPC está indisponível..';
@@ -12,7 +12,7 @@ $LANGUAGE['success'] = "Sucesso!";
 $LANGUAGE['awarded'] = "Você foi premiado";
 $LANGUAGE['bonus'] = "Além disso, de ter recebido um bônus";
 $LANGUAGE['try_later'] = "Algo deu errado não foi possível enviar {$SETTINGS->config['coin_code']}... Por favor, tente novamente mais tarde.";
-$LANGUAGE['no_more_for_you'] = "não mais {$SETTINGS->config['coin_code']} para você! Tente novamente mais tarde.";
+$LANGUAGE['no_more_for_you'] = "não mais {$SETTINGS->config['coin_code']} para você! Tente novamente mais tarde ({$SETTINGS->config['payout_interval']}).";
 $LANGUAGE['enter_captcha'] = "Digite o código acima";
 $LANGUAGE['bad_captcha'] = "O código CAPTCHA não está correcta!";
 $LANGUAGE['bad_address'] = "Você digitou um endereço {$SETTINGS->config['coin_code']} inválido!";
@@ -25,5 +25,7 @@ $LANGUAGE['payouts'] = "pagamentos";
 $LANGUAGE['faucet_balance'] = "Fundos torneira";
 $LANGUAGE['average_payout'] = "Pagamento médio";
 $LANGUAGE['support_sponsor'] = "Por favor, apoiar este site e clique na seguinte anúncio";
+
+$LANGUAGE['price'] = "Preço";
 
 ?>
