@@ -20,6 +20,8 @@ class Faucet {
 	protected $promo_payout_amount = 0;
 
 	protected $balance = 0;
+	
+	protected $STATS = array();
 
 	public function __construct($DB, $config, $PAYMENT_GATEWAY) {
 		if (!defined("SF_STATUS_OPERATIONAL")) {
@@ -243,26 +245,30 @@ class Faucet {
 		}
 	}
 
-	public function get_stats(){
-		$stats = array();
-		$stats['average_payout'] = $this->payout_aggregate("AVG");
-		$stats['smallest_payout'] = $this->payout_aggregate("MIN");
-		$stats['largest_payout'] = $this->payout_aggregate("MAX");
-		$stats['number_of_payouts'] = number_format($this->payout_aggregate("COUNT"), 0);
-		$stats['total_payouts'] = $this->payout_aggregate("SUM");
-		$stats['total_payout'] = $stats['total_payouts'];
-		
-		$stats['balance'] = $this->balance;
-		$stats['payout_amount'] = $this->payout_amount;
-		$stats['payout_address'] = $this->payout_address;
-		$stats['promo_payout_amount'] = $this->promo_payout_amount;
-		
-		$stats['minimum_payout'] = $this->SETTINGS->config['minimum_payout'];
-		$stats['maximum_payout'] = $this->SETTINGS->config['maximum_payout'];
-		$stats['payout_threshold'] = $this->SETTINGS->config['payout_threshold'];
-		return $stats;
+	protected function load_stats(){
+		$this->STATS['average_payout'] = number_format($this->payout_aggregate("AVG"), 6);
+		$this->STATS['smallest_payout'] = number_format($this->payout_aggregate("MIN"), 6);
+		$this->STATS['largest_payout'] = number_format($this->payout_aggregate("MAX"), 6);
+		$this->STATS['number_of_payouts'] = number_format($this->payout_aggregate("COUNT"));
+		$this->STATS['total_payouts'] = number_format($this->payout_aggregate("SUM"), 6);
+
+		$this->STATS['total_payout'] = $this->STATS['total_payouts'];
+
+		$this->STATS['balance'] = number_format($this->balance, 6);
+		$this->STATS['payout_amount'] = number_format($this->payout_amount, 6);
+		$this->STATS['payout_address'] = $this->payout_address;
+		$this->STATS['promo_payout_amount'] = $this->promo_payout_amount;
+
+		$this->STATS['minimum_payout'] = number_format($this->SETTINGS->config['minimum_payout'], 6);
+		$this->STATS['maximum_payout'] = number_format($this->SETTINGS->config['maximum_payout'], 6);
+		$this->STATS['payout_threshold'] = number_format($this->SETTINGS->config['payout_threshold'], 6);
 	}
-	
+
+	public function get_stats($refresh = false){
+		//Loaded stats if nessesary or requested
+		if(empty($this->STATS) || $refresh){$this->load_stats();}
+		return $this->STATS;
+	}
 	
 	public function status() {
 		return $this->status;
@@ -286,9 +292,7 @@ class Faucet {
 			$result = $this->DB->query($query);
 			if($result) {
 				$row = $result->fetch_array(MYSQLI_NUM);
-				//return is_float($row[0]) ? number_format($row[0],6) : $row[0];
-				return is_int($row[0]) ? $row[0] : number_format($row[0],6);
-				//return number_format($row[0],6);
+				return $row[0];
 			}
 		}
 		return false;

@@ -1,4 +1,4 @@
-MutiFaucet v0.8.1
+MutiFaucet v0.8.2
 =================
 Copyright 2014 by The Daniel Morante Company, Inc.
 http://www.unibia.net/crypto-faucet
