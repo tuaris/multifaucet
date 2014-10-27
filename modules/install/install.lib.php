@@ -82,6 +82,7 @@ $buffer = <<<EOF
 
 	"minimum_payout" => {$settings['minimum_payout']}, // minimum to be awarded
 	"maximum_payout" => {$settings['maximum_payout']}, // maximum to be awarded
+	"payout_precision" => {$settings['payout_precision']}, // floating point precision (1 to 8), defaults to 4 decimal places if not set or invalid
 	"payout_threshold" => {$settings['payout_threshold']}, // payout threshold, if the faucet contains less than this, display the 'dry_faucet' message
 	"payout_interval" => "{$settings['payout_interval']}", // payout interval, the wait time for a user between payouts. Type any numerical value with either a "m" (minutes), "h" (hours), or "d" (days), attached. Examples: 50m for a 50 minute delay, 7h for a 7 hour delay, etc.
 
@@ -342,9 +343,10 @@ function install_process_post_request($step, &$vars = array()){
 			case 5:
 				//Basic Site Preferences
 				$settings = array(
-					'minimum_payout' => $_POST['minimum_payout'], 
-					'maximum_payout' => $_POST['maximum_payout'], 
-					'payout_threshold' => $_POST['payout_threshold'], 
+					'minimum_payout' => sprintf('%.8f', $_POST['minimum_payout']), 
+					'maximum_payout' => sprintf('%.8f', $_POST['maximum_payout']), 
+					'payout_precision' => $_POST['payout_precision'], 
+					'payout_threshold' => sprintf('%.8f', $_POST['payout_threshold']), 
 					'payout_interval' => $_POST['payout_interval'], 
 					'user_check' => $_POST['user_check'], 
 					'use_captcha' => $_POST['captcha_type'], 
@@ -461,6 +463,7 @@ function install_get_faucet_config(){
 		"coin_code" => "ZET",
 		"minimum_payout" => 0.01, 
 		"maximum_payout" => 10, 
+		"payout_precision" => 4, 
 		"payout_threshold" => 250, 
 		"payout_interval" => "7h", 
 		"donation_address" => "ZK6kdE5H5q7H6QRNRAuqLF6RrVD4cFbiNX",
@@ -503,6 +506,12 @@ function install_get_faucet_config(){
 			case 'wallet_passphrase': 
 			case 'template': 
 			case 'user_check': 
+				break;
+			case 'minimum_payout':
+			case 'maximum_payout':
+			case 'payout_threshold':
+				//Reformat floating point display to match maximum presision
+				$faucet['SETTINGS'][$key] = sprintf('%.8f', $conf);
 				break;
 			default:
 				//Merge Loaded Settings

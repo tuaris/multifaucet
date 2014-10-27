@@ -21,6 +21,8 @@ class Faucet {
 
 	protected $balance = 0;
 	
+	protected $precision = 4;
+	
 	protected $STATS = array();
 
 	public function __construct($DB, $config, $PAYMENT_GATEWAY) {
@@ -43,6 +45,7 @@ class Faucet {
 		$defaults = array(
 			"minimum_payout" => 0.01,
 			"maximum_payout" => 10,
+			"payout_precision" => $this->get_precision(),
 			"payout_threshold" => 250,
 			"payout_interval" => "7h",
 			"user_check" => "both",
@@ -70,6 +73,9 @@ class Faucet {
 		else{
 			$this->status = SF_STATUS_MYSQL_CONNECTION_FAILED;
 		}
+
+		//Floating Point precision
+		$this->set_precision($this->SETTINGS->config["payout_precision"]);
 	}
 
 	public function payout($cryptocoin_address, $ip_address, $promo_code = ""){
@@ -165,7 +171,9 @@ class Faucet {
 				}
 				else {
 					// calculate a random promo COIN amount
-					$this->promo_payout_amount = mt_rand($promo["minimum_payout"]*10000,$promo["maximum_payout"]*10000)/10000;
+					$multiple = pow(10, $this->precision);
+					$random = mt_rand($promo["minimum_payout"] * $multiple,$promo["maximum_payout"] * $multiple)/ $multiple;
+					$this->promo_payout_amount = sprintf('%.' . $this->precision . 'f', $random);
 				}
 			}
 		}
@@ -173,8 +181,10 @@ class Faucet {
 
 	protected function do_payout(){
 		// calculate a random COIN amount
-		$this->payout_amount = mt_rand($this->SETTINGS->config["minimum_payout"]*10000,$this->SETTINGS->config["maximum_payout"]*10000)/10000; 
-		
+		$multiple = pow(10, $this->precision);
+		$random = mt_rand($this->SETTINGS->config["minimum_payout"] * $multiple,$this->SETTINGS->config["maximum_payout"] * $multiple) / $multiple; 
+		$this->payout_amount = sprintf('%.' . $this->precision . 'f', $random);
+
 		// insert the transaction into the payout log
 		$query = sprintf("INSERT INTO `%spayouts` (`payout_amount`,`ip_address`,`payout_address`,`promo_code`,`promo_payout_amount`,`timestamp`)
 			VALUES ('%s', '%s', '%s', '%s', '%s', NOW())", 
@@ -246,22 +256,22 @@ class Faucet {
 	}
 
 	protected function load_stats(){
-		$this->STATS['average_payout'] = number_format($this->payout_aggregate("AVG"), 6);
-		$this->STATS['smallest_payout'] = number_format($this->payout_aggregate("MIN"), 6);
-		$this->STATS['largest_payout'] = number_format($this->payout_aggregate("MAX"), 6);
+		$this->STATS['average_payout'] = number_format($this->payout_aggregate("AVG"), $this->precision);
+		$this->STATS['smallest_payout'] = number_format($this->payout_aggregate("MIN"), $this->precision);
+		$this->STATS['largest_payout'] = number_format($this->payout_aggregate("MAX"), $this->precision);
 		$this->STATS['number_of_payouts'] = number_format($this->payout_aggregate("COUNT"));
-		$this->STATS['total_payouts'] = number_format($this->payout_aggregate("SUM"), 6);
+		$this->STATS['total_payouts'] = number_format($this->payout_aggregate("SUM"), $this->precision);
 
 		$this->STATS['total_payout'] = $this->STATS['total_payouts'];
 
-		$this->STATS['balance'] = number_format($this->balance, 6);
-		$this->STATS['payout_amount'] = number_format($this->payout_amount, 6);
+		$this->STATS['balance'] = number_format($this->balance, $this->precision);
+		$this->STATS['payout_amount'] = number_format($this->payout_amount, $this->precision);
 		$this->STATS['payout_address'] = $this->payout_address;
 		$this->STATS['promo_payout_amount'] = $this->promo_payout_amount;
 
-		$this->STATS['minimum_payout'] = number_format($this->SETTINGS->config['minimum_payout'], 6);
-		$this->STATS['maximum_payout'] = number_format($this->SETTINGS->config['maximum_payout'], 6);
-		$this->STATS['payout_threshold'] = number_format($this->SETTINGS->config['payout_threshold'], 6);
+		$this->STATS['minimum_payout'] = number_format($this->SETTINGS->config['minimum_payout'], $this->precision);
+		$this->STATS['maximum_payout'] = number_format($this->SETTINGS->config['maximum_payout'], $this->precision);
+		$this->STATS['payout_threshold'] = number_format($this->SETTINGS->config['payout_threshold'], $this->precision);
 	}
 
 	public function get_stats($refresh = false){
@@ -272,6 +282,19 @@ class Faucet {
 	
 	public function status() {
 		return $this->status;
+	}
+
+	public function set_precision($precision){
+		//Must be an integer
+		$precision = (int)$precision;
+		// Must be between 1 and 8 inclusive.
+		if ($precision > 0 && $precision < 9){
+			$this->precision = $precision;
+		}
+	}
+
+	public function get_precision(){
+		return $this->precision;
 	}
 
 	// Payout aggregate functions, to make things easier.
