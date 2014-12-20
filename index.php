@@ -2,37 +2,42 @@
 <?php include('modules/faucet/faucet.lib.php'); ?>
 <?php 
 
-$FAUCET = new Faucet($DB, $SETTINGS, $PAYMENT_GATEWAY);
+$FAUCET = new iFaucet($DB, $SETTINGS, $PAYMENT_GATEWAY);
 
 $vars['title'] = $LANGUAGE['site_heading'];
 $vars['copyright'] = 'Copyright &copy;' . date("Y") . ' by SecurePayment CC';
 
-//Check if Submitting and validate CAPTCHA
-if (isset($_POST["cryptocoin_address"]) && 
-	faucet_valid_captcha($SETTINGS, $_SERVER["REMOTE_ADDR"], array(
-						'captcha_code' => @$_POST["captcha_code"], 
-						'recaptcha_response_field' => @$_POST["recaptcha_response_field"], 
-						'recaptcha_challenge_field' => @$_POST["recaptcha_challenge_field"],
-						'adcopy_challenge' => @$_POST["adcopy_challenge"],
-						'adcopy_response' => @$_POST["adcopy_response"])) 
-) {
+//if Submitting
+if (isset($_POST["cryptocoin_address"])) {
+	try{
+		//Checking CAPTCHA
+		$captchaValid = faucet_valid_captcha($SETTINGS, $_SERVER["REMOTE_ADDR"], $_POST);
+		//No sense in continueing if CAPTCHA is bad
+		if(!$captchaValid){throw new Exception("Post validation error:  Bad CPATCHA", FAUCET_STATUS_CAPTCHA_INCORRECT);}
 
-	//Check Spammer Slapper
-	if(faucet_check_spammerslapper($SETTINGS, $vars)){
-		//Good CAPTCHA and Spammer Slapper - attempt payout
-		$FAUCET->payout($_POST["cryptocoin_address"], $_SERVER["REMOTE_ADDR"], @$_POST["promo_code"]);
+		//Check if Valid Address
+		$FAUCET->SetAddress($_POST["cryptocoin_address"]);
+		//No sense in continueing if this is an invalid wallet address
+		if(!$FAUCET->isValidAddress()){throw new Exception("Post validation error:  Bad wallet address", FAUCET_STATUS_INVALID_COIN_ADDRESS);}
+
+		// Check SpammerSlapper
+		$isNotSPAM = faucet_check_spammerslapper($SETTINGS, $vars);
+		//No sense in continueing if this is SPAM
+		if(!$isNotSPAM){throw new Exception("Post validation error:  SPAM FAIL", FAUCET_STATUS_PAYOUT_ERROR);}
+
+		//Setup the other items
+		$FAUCET->SetIP($_SERVER["REMOTE_ADDR"]);
+		$FAUCET->SetPromoCode(@$_POST["promo_code"]);
+
+		//All required validations have passed, attempt payout
+		$FAUCET->Payout();
 
 		//Get status
 		$status = $FAUCET->status();
 	}
-	else {
-		//SpammerSlapper Failed
-		$status = SF_STATUS_PAYOUT_ERROR;
+	catch(Exception $e){
+		$status = $e->getCode();
 	}
-}
-elseif (isset($_POST["cryptocoin_address"])) {
-	//BAD CAPTCHA
-	$status = SF_STATUS_CAPTCHA_INCORRECT;
 }
 else{
 	//No Submition
@@ -45,20 +50,13 @@ $vars['stats'] = $FAUCET->get_stats();
 //Save Status
 $vars['status'] = $status;
 
-//TODO: I need to think of a better way to do this
-$show_form = faucet_eval_status($status, $vars, $LANGUAGE, $SETTINGS);
-if ($show_form){
-	// Render Captcha
-	$vars['captcha'] = faucet_get_captcha($SETTINGS);
-	// Render Form
-	$vars['content'] = render_template(faucet_get_content('form'), $vars); 
-}
-else{
-	// Render Error/Status
-	$vars['content'] = render_template(faucet_get_content('status'), $vars); 
-}
+// Render Status Message
+faucet_eval_status($vars, $FAUCET, $LANGUAGE, $SETTINGS);
+
+// Render Content
+$vars['content'] = render_template(template_file(faucet_get_content($status), 'faucet'), $vars); 
 
 // Render full page
-print render_template(template_file("page.tpl.php", get_current_theme_name()), $vars); 
+print render_template(template_file("page.tpl.php"), $vars); 
 
 ?>

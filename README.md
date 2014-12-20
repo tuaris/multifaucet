@@ -1,4 +1,4 @@
-MutiFaucet v0.8.3
+MutiFaucet v0.9
 =================
 Copyright 2014 by The Daniel Morante Company, Inc.
 http://www.unibia.net/crypto-faucet
@@ -26,6 +26,12 @@ Requirements
 - MySQL 5.1 or later
 - PHP 5.3 or later
 - Crypto currency wallet with RPC access (can be on a seprate server)
+- PHP Hash
+
+Optional
+--------
+
+- PHP Filter
 
 Installation
 -------------

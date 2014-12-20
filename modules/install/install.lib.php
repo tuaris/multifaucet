@@ -257,20 +257,11 @@ function create_datastore($path){
 }
 
 function install_get_content($step){
-	$template = 'modules' . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR;
-	$template .= 'install' . $step. '.php';
-	
-	if(!is_file($template)) {	
-		$template = '';
-	}
-	
-	return $template;
+	return 'install' . $step. '.php';
 }
 
 function install_get_breadcrumb($step){
-	$page = 'modules' . DIRECTORY_SEPARATOR . 'install' . DIRECTORY_SEPARATOR;
-	$page .= "install-nav.tpl.php";
-	return $page;
+	return "install-nav.tpl.php";
 }
 
 function install_get_page_heading($step){

@@ -53,7 +53,7 @@ $vars['LICENCE'] = getLicense();
 include("libraries/template.lib.php");
 
 //Build and Display Page
-$vars['breadcrumb'] = render_template(install_get_breadcrumb($step), $vars); 
-$vars['content'] = render_template(install_get_content($step), $vars); 
+$vars['breadcrumb'] = render_template(template_file(install_get_breadcrumb($step), 'install'), $vars); 
+$vars['content'] = render_template(template_file(install_get_content($step), 'install'), $vars); 
 print render_template(template_file("page.tpl.php"), $vars); 
 ?>

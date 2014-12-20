@@ -13,7 +13,11 @@ require_once("classes/CoinAddressValidator.class.php");
 require_once("classes/coldwallet.class.php");
 require_once("classes/jsonRPCClient.class.php");
 require_once("classes/hotwallet.class.php");
-require_once("classes/faucet.class.php");
+
+//Autoload classes
+spl_autoload_register(function ($class) {
+	include 'classes/' . $class . '.class.php';
+});
 
 //Check if database is installed
 if(is_file(APPLICATION_CONFDIR . 'db.conf.php')) {

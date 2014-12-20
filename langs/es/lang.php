@@ -12,10 +12,16 @@ $LANGUAGE['success'] = "¡Éxito!";
 $LANGUAGE['awarded'] = "Has sido premiado con";
 $LANGUAGE['bonus'] = "Además, has recibido un bono de";
 $LANGUAGE['try_later'] = "Algo falló no se pudo enviar {$SETTINGS->config['coin_code']}... Por favor intente de nuevo más tarde.";
-$LANGUAGE['no_more_for_you'] = "No mas {$SETTINGS->config['coin_code']} para usted! Intente de nuevo más tarde ({$SETTINGS->config['payout_interval']}).";
+$LANGUAGE['no_more_for_you'] = "No mas {$SETTINGS->config['coin_code']} para usted!";
+$LANGUAGE['come_back_in'] = "Intente de nuevo más tarde.";
+$LANGUAGE['days'] = "días";
+$LANGUAGE['hours'] = "horas";
+$LANGUAGE['minutes'] = "minutos";
+$LANGUAGE['seconds'] = "segundos";
 $LANGUAGE['enter_captcha'] = "Introduzca el código de arriba";
 $LANGUAGE['bad_captcha'] = "El código de CAPTCHA que has introducido esta incorrecto!";
 $LANGUAGE['bad_address'] = "Ha introducido una dirección {$SETTINGS->config['coin_code']} inválida!";
+$LANGUAGE['bad_ip'] = "Dirección IP inválida!";
 
 $LANGUAGE['enter_address'] = "Ingrese su dirección de {$SETTINGS->config['coin_code']} aquí";
 $LANGUAGE['enter_pomo'] = "Código promocional (opcional)";
