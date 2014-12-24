@@ -3,6 +3,8 @@ MutiFaucet v0.9
 Copyright 2014 by The Daniel Morante Company, Inc.
 http://www.unibia.net/crypto-faucet
 
+WARNING: This is the development brach is is probably broken!
+
 Easy to setup crypto currency faucet that supports multiple currencies.  
 It was loosely derived from the Simple Faucet script by Dogenes.  This faucet
 is built using the Enchilada Frame Work 3.0 and Enchilada Libraries 2.0 (http://www.buenapp.com/).
