@@ -25,6 +25,7 @@ Requirements
 
 - MySQL 5.1 or later
 - PHP 5.3 or later
+- PHP JSON extension must be enabled
 - Crypto currency wallet with RPC access (can be on a seprate server)
 
 Installation
